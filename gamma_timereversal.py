@@ -39,7 +39,7 @@ def spinband2index(nbands, bands, spins):
       while each spin digit is lement of [0,1] = [spinup,spindown] '''
   # b1,b2,b3,b4 = int(str(bands)[0])+1,int(str(bands)[1])+1,int(str(bands)[2])+1,int(str(bands)[3])+1
   # s1,s2,s3,s4 = int(str(spins)[0])+1,int(str(spins)[1])+1,int(str(spins)[2])+1,int(str(spins)[3])+1
-  index = 8*nbands**3*(2*(bands[0]+1)+(spins[0]+1)-3) + 4*nbands*+3*(2*(bands[1]+1)+(spins[1]+1)-3)+2*nbands*(2*(bands[2]+1)+(spins[2]+1)-3)+2*(bands[3]+1)+(spins[3]+1)-2
+  index = 8*nbands**3*(2*(bands[0]+1)+(spins[0]+1)-3) + 4*nbands**2*(2*(bands[1]+1)+(spins[1]+1)-3)+2*nbands*(2*(bands[2]+1)+(spins[2]+1)-3)+2*(bands[3]+1)+(spins[3]+1)-2
   return index
 
 f = h5py.File('threelegs_orig.hdf5','r')
