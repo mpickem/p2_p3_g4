@@ -44,7 +44,7 @@ def spinband2index(nbands, bands, spins):
   if bands >= 1111 and bands <= (nbands*1111) and spins >= 1111 and spins <= 2222:
     b1,b2,b3,b4 = int(str(bands)[0]),int(str(bands)[1]),int(str(bands)[2]),int(str(bands)[3])
     s1,s2,s3,s4 = int(str(spins)[0]),int(str(spins)[1]),int(str(spins)[2]),int(str(spins)[3])
-    index = 8*nbands**3*(2*b1+s1-3) + 4*nbands*+3*(2*b2+s2-3)+2*nbands*(2*b3+s3-3)+2*b4+s4-2
+    index = 8*nbands**3*(2*b1+s1-3) + 4*nbands**2*(2*b2+s2-3)+2*nbands*(2*b3+s3-3)+2*b4+s4-2
     return index
   else:
     print('Wrong bands or spin combination')
@@ -148,7 +148,7 @@ else:
 
 # COMPARISON WITH INTERNAL SUMMED CHI0F object
 
-input_internal = h5py.File('/home/lv70585/pickemERC/SRVO-VQ-TESTING/1imp-test/output-internal/adga-20180525-161024.223-output.hdf5','r')
+# input_internal = h5py.File('/home/lv70585/pickemERC/SRVO-VQ-TESTING/1imp-test/output-internal/adga-20180525-161024.223-output.hdf5','r')
 # input_internal = h5py.File('/home/lv70585/pickemERC/SRVO-VQ-TESTING/1imp-test/output-gamma+chi0/adga-20180524-152953.147-output.hdf5','r')
 # input_internal = h5py.File('/home/lv70585/pickemERC/SRVO-VQ-TESTING/1imp-test/output-gammachi0/adga-20180524-154517.677-output.hdf5','r')
 
@@ -232,7 +232,7 @@ else:
 # threelegs = h5py.File('/home/lv70585/pickemERC/SRVO-VQ-TESTING/1imp-test/output-external/adga-20180525-142357.148-output.hdf5','r')
 # threelegs = h5py.File('/home/lv70585/pickemERC/SRVO-VQ-TESTING/1imp-test/output-external/adga-20180525-144132.233-output.hdf5','r')
 # threelegs = h5py.File('/home/lv70585/pickemERC/SRVO-VQ-TESTING/1imp-test/output-external/adga-20180525-145447.696-output.hdf5','r')
-threelegs = h5py.File('/home/lv70585/pickemERC/SRVO-VQ-TESTING/1imp-test/output-external/adga-20180525-161017.908-output.hdf5','r')
+# threelegs = h5py.File('/home/lv70585/pickemERC/SRVO-VQ-TESTING/1imp-test/output-external/adga-20180525-161017.908-output.hdf5','r')
 
 
 # g = plt.figure()
@@ -246,7 +246,7 @@ threelegs = h5py.File('/home/lv70585/pickemERC/SRVO-VQ-TESTING/1imp-test/output-
 # sys.exit()
 
 
-if True:
+if False:
   g = plt.figure(figsize=(15,7))
   ax1 = g.add_subplot(121)
   ax1.set_title(r'$P3$')
@@ -261,50 +261,50 @@ if True:
 
   plt.show()
 
-if False:
+if True:
 # above here ... everything works properly
-  g=plt.figure(figsize=(25,10))
+  g=plt.figure(figsize=(15,10))
 
-  ax5 = g.add_subplot(243)
+  ax5 = g.add_subplot(222)
   ax5.set_title(r'$\gamma_d$')
   plt.pcolormesh(beta*gamma_d[n3iwf-n4iwf:n3iwf+n4iwf,n3iwb-n4iwb:n3iwb+n4iwb+1].real)
   vmind, vmaxd = plt.gci().get_clim()
   plt.colorbar()
 
-  ax6 = g.add_subplot(247)
+  ax6 = g.add_subplot(224)
   ax6.set_title(r'$\gamma_m$')
   plt.pcolormesh(beta*gamma_m[n3iwf-n4iwf:n3iwf+n4iwf,n3iwb-n4iwb:n3iwb+n4iwb+1].real)
   vminm, vmaxm = plt.gci().get_clim()
   plt.colorbar()
 
-  ax1 = g.add_subplot(241)
+  ax1 = g.add_subplot(221)
   ax1.set_title(r'$\gamma_d$')
   plt.pcolormesh(gamma_sum_d.real,vmin=vmind,vmax=vmaxd)
   plt.colorbar()
 
-  ax2 = g.add_subplot(245, sharex=ax1, sharey=ax1)
+  ax2 = g.add_subplot(223, sharex=ax1, sharey=ax1)
   ax2.set_title(r'$\gamma_m$')
   plt.pcolormesh(gamma_sum_m.real,vmin=vminm,vmax=vmaxm)
   plt.colorbar()
 
-  ax3 = g.add_subplot(242)
-  ax3.set_title(r'$\gamma_d$')
-  plt.pcolormesh(input_internal['gamma/dens'][b1,b2,b3,b4,:,:].real, vmin=vmind, vmax=vmaxd)
-  plt.colorbar()
+  # ax3 = g.add_subplot(242)
+  # ax3.set_title(r'$\gamma_d$')
+  # plt.pcolormesh(input_internal['gamma/dens'][b1,b2,b3,b4,:,:].real, vmin=vmind, vmax=vmaxd)
+  # plt.colorbar()
 
-  ax4 = g.add_subplot(246)
-  ax4.set_title(r'$\gamma_m$')
-  plt.pcolormesh(input_internal['gamma/magn'][b1,b2,b3,b4,:,:].real, vmin=vminm, vmax=vmaxm)
-  plt.colorbar()
+  # ax4 = g.add_subplot(246)
+  # ax4.set_title(r'$\gamma_m$')
+  # plt.pcolormesh(input_internal['gamma/magn'][b1,b2,b3,b4,:,:].real, vmin=vminm, vmax=vmaxm)
+  # plt.colorbar()
 
-  ax5 = g.add_subplot(244)
-  ax5.set_title(r'$\gamma_d$')
-  plt.pcolormesh(threelegs['gamma/dens'][b1,b2,b3,b4].real)
-  plt.colorbar()
+  # ax5 = g.add_subplot(244)
+  # ax5.set_title(r'$\gamma_d$')
+  # plt.pcolormesh(threelegs['gamma/dens'][b1,b2,b3,b4].real)
+  # plt.colorbar()
 
-  ax2 = g.add_subplot(248)
-  ax2.set_title(r'$\gamma_m$')
-  plt.pcolormesh(threelegs['gamma/magn'][b1,b2,b3,b4].real)
-  plt.colorbar()
+  # ax2 = g.add_subplot(248)
+  # ax2.set_title(r'$\gamma_m$')
+  # plt.pcolormesh(threelegs['gamma/magn'][b1,b2,b3,b4].real)
+  # plt.colorbar()
 
   plt.show()
