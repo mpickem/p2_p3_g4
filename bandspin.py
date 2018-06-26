@@ -34,7 +34,7 @@ for i in xrange(ndim):
         # kanamori interaction; xxxx xxyy xyyx xyxy
         if (i==j and k==l): #xxyy
           pass
-        elif (i==l and j==l): #xyyx
+        elif (i==l and j==k): #xyyx
           pass
         elif (i==k and j==l): #xyxy
           pass
